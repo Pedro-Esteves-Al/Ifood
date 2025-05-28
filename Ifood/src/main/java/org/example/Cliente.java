@@ -6,12 +6,18 @@ import java.util.Observer;
 public class Cliente implements Observer {
     private String estadoPedido;
 
+    public String getEstadoPedido() {
+        return estadoPedido;
+    }
+
     public void fazerPedido(Pedido pedido) {
+
         pedido.addObserver(this);
+        //Faz com que o observer seja acionado assim q o pedido é feito.
+        this.update(pedido, null);
     }
 
     public void update(Observable pedido, Object arg1) {
-        //tem um erro aqui
-        this.estadoPedido = "Pedido" + pedido.getEstado();
+        this.estadoPedido = "Pedido está " + pedido.toString();
     }
 }
