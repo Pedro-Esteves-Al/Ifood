@@ -57,23 +57,18 @@ class PedidoTest {
 
     @Test
     void deveTestarPagamentoPorPix() {
-        PagamentoPix pix = new PagamentoPix();
-        pedido.pagar(pix);
-        assertEquals("Pix",pedido.getFormaDePagamento());
+        pedido.pagarPorPix();
+        assertEquals("Pagamento feito por Pix",pedido.getFormaDePagamento());
     }
-
-    @Test
-    void deveTestarPagamentoPorCartao() {
-        PagamentoCartao cartao = new PagamentoCartao();
-        pedido.pagar(cartao);
-        assertEquals("Cartão",pedido.getFormaDePagamento());
-    }
-
     @Test
     void deveTestarPagamentoPorDinheiro() {
-        PagamentoDinheiro dinheiro = new PagamentoDinheiro();
-        pedido.pagar(dinheiro);
-        assertEquals("Dinheiro",pedido.getFormaDePagamento());
+        pedido.pagarPorDinheiro();
+        assertEquals("Pagamento feito por Dinheiro",pedido.getFormaDePagamento());
+    }
+    @Test
+    void deveTestarPagamentoPorCartao() {
+        pedido.pagarPorCartao();
+        assertEquals("Pagamento feito por Cartão",pedido.getFormaDePagamento());
     }
 
 }

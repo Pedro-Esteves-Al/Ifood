@@ -1,7 +1,6 @@
 package org.example;
 
 import java.util.Observable;
-import java.util.Observer;
 
 public class Pedido extends Observable {
     private PedidoEstado estado;
@@ -45,8 +44,17 @@ public class Pedido extends Observable {
         return this.estado.getEstado();
     }
 
-    public String pagar(Pagamento pagamento) {
-        return this.formaDePagamento = pagamento.tipo();
+    public void pagarPorPix() {
+        Pagamento pagamento = new Pagamento();
+        this.formaDePagamento = pagamento.processarPagamento(FormaDePagamentoPix.getInstance());
+    }
+    public void pagarPorCartao() {
+        Pagamento pagamento = new Pagamento();
+        this.formaDePagamento = pagamento.processarPagamento(FormaDePagamentoCartao.getInstance());
+    }
+    public void pagarPorDinheiro() {
+        Pagamento pagamento = new Pagamento();
+        this.formaDePagamento = pagamento.processarPagamento(FormaDePagamentoDinheiro.getInstance());
     }
 
 }
