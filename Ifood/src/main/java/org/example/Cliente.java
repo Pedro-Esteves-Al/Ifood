@@ -13,11 +13,12 @@ public class Cliente implements Observer {
     public void fazerPedido(Pedido pedido) {
 
         pedido.addObserver(this);
-        //Faz com que o observer seja acionado assim q o pedido é feito.
+        //Faz o observer seja acionado assim q o pedido é feito.
         this.update(pedido, null);
     }
 
     public void update(Observable pedido, Object arg1) {
         this.estadoPedido = "Pedido está " + pedido.toString();
     }
+
 }

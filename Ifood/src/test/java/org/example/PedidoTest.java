@@ -42,16 +42,38 @@ class PedidoTest {
     }
 
     @Test
-    void testClienteObservado() {
+    void deveNotificarCliente() {
         pedido.proximoEstado();
         assertEquals("Pedido está Entregando", cliente.getEstadoPedido());
     }
 
-  @Test
+    @Test
     void naoDeveNotificarClienteQueNaoFezPedido() {
         Cliente cliente2 = new Cliente();
 
         assertEquals("Pedido está Preparando",cliente.getEstadoPedido());
         assertNull(cliente2.getEstadoPedido());
     }
+
+    @Test
+    void deveTestarPagamentoPorPix() {
+        PagamentoPix pix = new PagamentoPix();
+        pedido.pagar(pix);
+        assertEquals("Pix",pedido.getFormaDePagamento());
+    }
+
+    @Test
+    void deveTestarPagamentoPorCartao() {
+        PagamentoCartao cartao = new PagamentoCartao();
+        pedido.pagar(cartao);
+        assertEquals("Cartão",pedido.getFormaDePagamento());
+    }
+
+    @Test
+    void deveTestarPagamentoPorDinheiro() {
+        PagamentoDinheiro dinheiro = new PagamentoDinheiro();
+        pedido.pagar(dinheiro);
+        assertEquals("Dinheiro",pedido.getFormaDePagamento());
+    }
+
 }

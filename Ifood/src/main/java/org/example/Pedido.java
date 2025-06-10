@@ -5,6 +5,11 @@ import java.util.Observer;
 
 public class Pedido extends Observable {
     private PedidoEstado estado;
+    private String formaDePagamento;
+
+    public String getFormaDePagamento() {
+        return formaDePagamento;
+    }
 
     public void setEstado(PedidoEstado estado) {
         this.estado = estado;
@@ -28,8 +33,6 @@ public class Pedido extends Observable {
         entregando.setProximo(entregue);
 
         this.estado = preparando;
-
-        //this.estado = PedidoEstadoPreparando.getPedidoEstadoPreparando();
     }
 
     public void atualizarStatus() {
@@ -40,6 +43,10 @@ public class Pedido extends Observable {
     @Override
     public String toString() {
         return this.estado.getEstado();
+    }
+
+    public String pagar(Pagamento pagamento) {
+        return this.formaDePagamento = pagamento.tipo();
     }
 
 }
