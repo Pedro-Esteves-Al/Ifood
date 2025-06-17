@@ -4,9 +4,9 @@ import java.util.Observable;
 
 public class Pedido extends Observable {
     private PedidoEstado estado;
-    private String formaDePagamento;
+    private Pagamento formaDePagamento = new Pagamento();
 
-    public String getFormaDePagamento() {
+    public Pagamento getFormaDePagamento() {
         return formaDePagamento;
     }
 
@@ -44,17 +44,14 @@ public class Pedido extends Observable {
         return this.estado.getEstado();
     }
 
-    public void pagarPorPix() {
-        Pagamento pagamento = new Pagamento();
-        this.formaDePagamento = pagamento.processarPagamento(FormaDePagamentoPix.getInstance());
+    public String pagarPorPix() {
+        return this.formaDePagamento.processarPagamento(FormaDePagamentoPix.getInstance());
     }
-    public void pagarPorCartao() {
-        Pagamento pagamento = new Pagamento();
-        this.formaDePagamento = pagamento.processarPagamento(FormaDePagamentoCartao.getInstance());
+    public String pagarPorCartao() {
+        return this.formaDePagamento.processarPagamento(FormaDePagamentoCartao.getInstance());
     }
-    public void pagarPorDinheiro() {
-        Pagamento pagamento = new Pagamento();
-        this.formaDePagamento = pagamento.processarPagamento(FormaDePagamentoDinheiro.getInstance());
+    public String pagarPorDinheiro() {
+        return this.formaDePagamento.processarPagamento(FormaDePagamentoDinheiro.getInstance());
     }
 
 }

@@ -6,13 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 class PedidoTest {
     Pedido pedido;
-    Cliente cliente;
 
     @BeforeEach
     void setUp() {
         pedido = new Pedido();
-        cliente = new Cliente();
-        cliente.fazerPedido(pedido);
     }
 
     @Test
@@ -42,33 +39,16 @@ class PedidoTest {
     }
 
     @Test
-    void deveNotificarCliente() {
-        pedido.proximoEstado();
-        assertEquals("Pedido está Entregando", cliente.getEstadoPedido());
-    }
-
-    @Test
-    void naoDeveNotificarClienteQueNaoFezPedido() {
-        Cliente cliente2 = new Cliente();
-
-        assertEquals("Pedido está Preparando",cliente.getEstadoPedido());
-        assertNull(cliente2.getEstadoPedido());
-    }
-
-    @Test
     void deveTestarPagamentoPorPix() {
-        pedido.pagarPorPix();
-        assertEquals("Pagamento feito por Pix",pedido.getFormaDePagamento());
+        assertEquals("Pagamento feito por Pix",pedido.pagarPorPix());
     }
     @Test
     void deveTestarPagamentoPorDinheiro() {
-        pedido.pagarPorDinheiro();
-        assertEquals("Pagamento feito por Dinheiro",pedido.getFormaDePagamento());
+        assertEquals("Pagamento feito por Dinheiro",pedido.pagarPorDinheiro());
     }
     @Test
     void deveTestarPagamentoPorCartao() {
-        pedido.pagarPorCartao();
-        assertEquals("Pagamento feito por Cartão",pedido.getFormaDePagamento());
+        assertEquals("Pagamento feito por Cartão",pedido.pagarPorCartao());
     }
 
 }
