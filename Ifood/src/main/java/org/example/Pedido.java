@@ -2,12 +2,21 @@ package org.example;
 
 import java.util.Observable;
 
-public class Pedido extends Observable {
+public class Pedido extends Observable implements Cloneable {
     private PedidoEstado estado;
     private Pagamento formaDePagamento = new Pagamento();
+    private String conteudoPedido;
 
     public Pagamento getFormaDePagamento() {
         return formaDePagamento;
+    }
+
+    public String getConteudoPedido() {
+        return conteudoPedido;
+    }
+
+    public void setConteudoPedido(String conteudoPedido) {
+        this.conteudoPedido = conteudoPedido;
     }
 
     public void setEstado(PedidoEstado estado) {
@@ -52,6 +61,17 @@ public class Pedido extends Observable {
     }
     public String pagarPorDinheiro() {
         return this.formaDePagamento.processarPagamento(FormaDePagamentoDinheiro.getInstance());
+    }
+
+    public Pedido pedirNovamente() throws CloneNotSupportedException {
+        Pedido pedido = (Pedido) this.clone();
+        PedidoEstadoPreparando estado = PedidoEstadoPreparando.getPedidoEstadoPreparando();
+        pedido.setEstado(estado);
+        return pedido;
+    }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
 }

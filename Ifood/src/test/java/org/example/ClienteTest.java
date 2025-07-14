@@ -34,5 +34,36 @@ class ClienteTest {
         assertEquals("Pedido está Preparando",cliente.getEstadoPedido());
         assertNull(cliente2.getEstadoPedido());
     }
+    @Test
+    void deveRetornarClienteValido() {
+        ClienteBuilder clienteBuilder = new ClienteBuilder();
+        Endereco endereco = new Endereco("Rua do ifet", "fábrica");
+        Cliente cliente = clienteBuilder
+                .setInformacoesCadastro("nome,email etc")
+                .setEndereco(endereco)
+                .build();
+
+        assertNotNull(cliente);
+    }
+    @Test
+    void deveRetornarExcecaoCadastroInvalido() {
+        try {
+            ClienteBuilder clienteBuilder = new ClienteBuilder();
+            Cliente cliente = clienteBuilder
+                    .setInformacoesCadastro("")
+                    .build();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Cadastro não informado", e.getMessage());
+        }
+    }
+
+    @Test
+    void deveRetornarTotalEnderecos() {
+        Endereco endereco = EnderecoFactory.getEndereco("Rua do ifet", "fábrica");
+        Endereco endereco2 = EnderecoFactory.getEndereco("Rua do ifet", "fábrica");
+        Endereco endereco3 = EnderecoFactory.getEndereco("Rua2", "alto dos passos");
+
+        assertEquals(2, EnderecoFactory.getTotalEnderecos());
+    }
 
 }

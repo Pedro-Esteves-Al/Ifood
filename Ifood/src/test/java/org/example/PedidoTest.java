@@ -51,4 +51,12 @@ class PedidoTest {
         assertEquals("Pagamento feito por Cartão",pedido.pagarPorCartao());
     }
 
+    @Test
+    void deveTestarPedirNovamente() throws CloneNotSupportedException {
+        pedido.setConteudoPedido("pão queijo carne");
+        Pedido pedido1 = pedido.pedirNovamente();
+        assertEquals("pão queijo carne",pedido1.getConteudoPedido());
+        assertEquals("Preparando", pedido1.verificaEstado().getEstado());
+    }
+
 }
