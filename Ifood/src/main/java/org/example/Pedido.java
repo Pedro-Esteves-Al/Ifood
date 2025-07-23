@@ -6,6 +6,7 @@ public class Pedido extends Observable implements Cloneable {
     private PedidoEstado estado;
     private Pagamento formaDePagamento = new Pagamento();
     private String conteudoPedido;
+    private Avaliacao avaliacao;
 
     public Pagamento getFormaDePagamento() {
         return formaDePagamento;
@@ -13,6 +14,14 @@ public class Pedido extends Observable implements Cloneable {
 
     public String getConteudoPedido() {
         return conteudoPedido;
+    }
+
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
     public void setConteudoPedido(String conteudoPedido) {
@@ -72,6 +81,14 @@ public class Pedido extends Observable implements Cloneable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    public void receberAvaliacao(String texto, int nota, String imagem) {
+        if (imagem == null) {
+            this.avaliacao = new AvaliacaoSemImagem(texto, nota);
+        } else {
+            this.avaliacao = new AvaliacaoComImagem(texto, nota,imagem);
+        }
     }
 
 }

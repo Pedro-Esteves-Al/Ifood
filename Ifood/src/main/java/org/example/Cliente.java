@@ -60,4 +60,8 @@ public class Cliente implements Observer, Iterable<Pedido>{
         return pedidos.iterator();
     }
 
+    public void avaliarPedido(Pedido pedido,String texto, int nota, String imagem) {
+        pedido.receberAvaliacao(texto,nota,imagem);
+    }
+
 }

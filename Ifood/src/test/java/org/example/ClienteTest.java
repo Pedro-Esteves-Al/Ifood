@@ -103,4 +103,22 @@ class ClienteTest {
         assertEquals(2, HistoricoDePedidos.contarTotalPedidosCliente(cliente));
     }
 
+    @Test
+    void deveAvaliarPedidoSemImagemESemPassarPelaGerencia() {
+        cliente.avaliarPedido(pedido,"bom",3,null);
+        assertEquals(3,pedido.getAvaliacao().getNota());
+        assertEquals("Avaliacao Postada sem imagem", pedido.getAvaliacao().postarAvaliacao());
+    }
+
+    @Test
+    void deveAvaliarPedidoSemImagemPassandoPorGerencia() {
+        cliente.avaliarPedido(pedido,"bom",2,"foto de hamburguer");
+        assertEquals("Avaliacao em análise", pedido.getAvaliacao().postarAvaliacao());
+    }
+    @Test
+    void deveAvaliarPedidoComImagem() {
+        cliente.avaliarPedido(pedido,"bom",3,"foto de hamburguer");
+        assertEquals("Avaliacao em análise", pedido.getAvaliacao().postarAvaliacao());
+    }
+
 }
