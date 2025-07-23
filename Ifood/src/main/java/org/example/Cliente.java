@@ -1,14 +1,13 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
-public class Cliente implements Observer {
+public class Cliente implements Observer, Iterable<Pedido>{
     private String estadoPedido;
     private String cadastro;
     private List<Tarefa> tarefas = new ArrayList<Tarefa>();
+    private List<Pedido> pedidos = new ArrayList<Pedido>();
+
     private Endereco endereco;
 
     public Endereco getEndereco() {
@@ -37,6 +36,7 @@ public class Cliente implements Observer {
         pedido.addObserver(this);
         //Faz o observer seja acionado assim q o pedido é feito.
         this.update(pedido, null);
+        pedidos.add(pedido);
     }
 
     public void update(Observable pedido, Object arg1) {
@@ -54,6 +54,10 @@ public class Cliente implements Observer {
             tarefa.cancelar();
             this.tarefas.remove(this.tarefas.size() - 1);
         }
+    }
+    @Override
+    public Iterator<Pedido> iterator() {
+        return pedidos.iterator();
     }
 
 }

@@ -97,4 +97,10 @@ class ClienteTest {
         assertEquals("Chamado aberto", chamadoSuporte.getSituacao());
     }
 
+    @Test
+    void deveContarTotalPedidosHistoricoDePedidos() {
+        cliente.fazerPedido(new Pedido());
+        assertEquals(2, HistoricoDePedidos.contarTotalPedidosCliente(cliente));
+    }
+
 }
