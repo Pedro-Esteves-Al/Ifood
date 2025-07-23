@@ -8,12 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClienteTest {
     Pedido pedido;
     Cliente cliente;
+    ChamadoSuporte chamadoSuporte;
 
     @BeforeEach
     void setUp() {
         pedido = new Pedido();
         cliente = new Cliente();
         cliente.fazerPedido(pedido);
+        chamadoSuporte = new ChamadoSuporte();
     }
 
     @Test
@@ -64,6 +66,35 @@ class ClienteTest {
         Endereco endereco3 = EnderecoFactory.getEndereco("Rua2", "alto dos passos");
 
         assertEquals(2, EnderecoFactory.getTotalEnderecos());
+    }
+
+    @Test
+    void deveAbrirChamadoSuporte() {
+        Tarefa abrirChamadoSuporte = new AbrirChamadoSuporte(chamadoSuporte);
+        cliente.executarTarefa(abrirChamadoSuporte);
+
+        assertEquals("Chamado aberto", chamadoSuporte.getSituacao());
+    }
+
+    @Test
+    void deveFecharChamadoSuporte() {
+        Tarefa fecharChamadoSuporte = new FecharChamadoSuporte(chamadoSuporte);
+        cliente.executarTarefa(fecharChamadoSuporte);
+
+        assertEquals("Chamado fechado", chamadoSuporte.getSituacao());
+    }
+
+    @Test
+    void deveCancelarFecharChamadoSuporte() {
+        Tarefa abrirChamadoSuporte = new AbrirChamadoSuporte(chamadoSuporte);
+        Tarefa fecharChamadoSuporte = new FecharChamadoSuporte(chamadoSuporte);
+
+        cliente.executarTarefa(abrirChamadoSuporte);
+        cliente.executarTarefa(fecharChamadoSuporte);
+
+        cliente.cancelarUltimaTarefa();
+
+        assertEquals("Chamado aberto", chamadoSuporte.getSituacao());
     }
 
 }

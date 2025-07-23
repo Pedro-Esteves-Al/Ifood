@@ -1,12 +1,14 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 public class Cliente implements Observer {
     private String estadoPedido;
     private String cadastro;
-
+    private List<Tarefa> tarefas = new ArrayList<Tarefa>();
     private Endereco endereco;
 
     public Endereco getEndereco() {
@@ -39,6 +41,19 @@ public class Cliente implements Observer {
 
     public void update(Observable pedido, Object arg1) {
         this.estadoPedido = "Pedido está " + pedido.toString();
+    }
+
+    public void executarTarefa(Tarefa tarefa) {
+        this.tarefas.add(tarefa);
+        tarefa.executar();
+    }
+
+    public void cancelarUltimaTarefa() {
+        if (!tarefas.isEmpty()) {
+            Tarefa tarefa = this.tarefas.get(this.tarefas.size() - 1);
+            tarefa.cancelar();
+            this.tarefas.remove(this.tarefas.size() - 1);
+        }
     }
 
 }
