@@ -138,5 +138,11 @@ class ClienteTest {
     void deveConfirmarQueClienteRecebeuNotificacaoPorEmail() {
         assertEquals("[EMAIL: Notificação de Pedido: Pedido confirmado]",cliente.getNotificacoes().toString());
     }
+    @Test
+    void deveAuditarCliente() {
+        Visitor auditoria = new AuditorVisitor();
+        cliente.aceitar(auditoria);
+        
+    }
 
 }

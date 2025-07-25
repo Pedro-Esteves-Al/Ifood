@@ -2,7 +2,8 @@ package org.example;
 
 import java.util.*;
 
-public class Cliente implements Observer, Iterable<Pedido>{
+public class Cliente implements Observer, Iterable<Pedido>, Usuario {
+    private String nome;
     private String estadoPedido;
     private String cadastro;
     private Endereco endereco;
@@ -10,6 +11,13 @@ public class Cliente implements Observer, Iterable<Pedido>{
     private List<Pedido> pedidos = new ArrayList<Pedido>();
     private List<Notificacao> notificacoes = new ArrayList<Notificacao>();
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public Endereco getEndereco() {
         return endereco;
@@ -76,4 +84,11 @@ public class Cliente implements Observer, Iterable<Pedido>{
         pedido.receberAvaliacao(texto,nota,imagem);
     }
 
+    @Override
+    public void aceitar(Visitor visitor) {
+        visitor.visitar(this);
+    }
+    public String getAuditoria() {
+        return "Entregador: " + this.nome + "fez um total de " + HistoricoDePedidos.contarTotalPedidosCliente(this) + " pedidos";
+    }
 }
