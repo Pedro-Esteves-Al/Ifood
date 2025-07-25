@@ -1,5 +1,6 @@
 package org.example;
 
 public interface Visitor {
-    void visitar(Object object);
+    void visitar(Usuario usuario);
+    String getAuditoria();
 }

@@ -141,8 +141,9 @@ class ClienteTest {
     @Test
     void deveAuditarCliente() {
         Visitor auditoria = new AuditorVisitor();
+        cliente.setNome("Marco");
         cliente.aceitar(auditoria);
-        
+        assertEquals("Cliente Marco fez um total de 1 pedido(s)",auditoria.getAuditoria());
     }
 
 }

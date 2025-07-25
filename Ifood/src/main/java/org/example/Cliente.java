@@ -89,6 +89,6 @@ public class Cliente implements Observer, Iterable<Pedido>, Usuario {
         visitor.visitar(this);
     }
     public String getAuditoria() {
-        return "Entregador: " + this.nome + "fez um total de " + HistoricoDePedidos.contarTotalPedidosCliente(this) + " pedidos";
+        return "Cliente " + this.getNome() + " fez um total de " + HistoricoDePedidos.contarTotalPedidosCliente(this) + " pedido(s)";
     }
 }

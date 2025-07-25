@@ -8,6 +8,10 @@ public class Entregador implements Usuario{
     private String nome;
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 
+    public Entregador(String nome) {
+        this.nome = nome;
+    }
+
     public int getTotalEntregasRealizadas() {
         return pedidos.size();
     }
@@ -17,7 +21,7 @@ public class Entregador implements Usuario{
     }
 
     public String getAuditoria() {
-        return "Entregador: " + this.nome + "fez um total de " + getTotalEntregasRealizadas() + " entregas";
+        return "Entregador: " + this.nome + " fez um total de " + getTotalEntregasRealizadas() + " entrega(s)";
     }
 
     @Override
