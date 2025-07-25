@@ -134,5 +134,9 @@ class ClienteTest {
             assertEquals("Cliente possui pagamento pendente, não poderá fazer novos pedidos até completa-lo", e.getMessage());
         }
     }
+    @Test
+    void deveConfirmarQueClienteRecebeuNotificacaoPorEmail() {
+        assertEquals("[EMAIL: Notificação de Pedido: Pedido confirmado]",cliente.getNotificacoes().toString());
+    }
 
 }

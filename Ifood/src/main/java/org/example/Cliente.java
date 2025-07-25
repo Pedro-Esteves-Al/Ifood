@@ -5,10 +5,11 @@ import java.util.*;
 public class Cliente implements Observer, Iterable<Pedido>{
     private String estadoPedido;
     private String cadastro;
+    private Endereco endereco;
     private List<Tarefa> tarefas = new ArrayList<Tarefa>();
     private List<Pedido> pedidos = new ArrayList<Pedido>();
+    private List<Notificacao> notificacoes = new ArrayList<Notificacao>();
 
-    private Endereco endereco;
 
     public Endereco getEndereco() {
         return endereco;
@@ -31,6 +32,10 @@ public class Cliente implements Observer, Iterable<Pedido>{
         return estadoPedido;
     }
 
+    public List<Notificacao> getNotificacoes() {
+        return notificacoes;
+    }
+
     public void fazerPedido(Pedido pedido) {
         if (ClienteFacade.verificarPendenciasPagamento(this)) {
             throw new IllegalArgumentException(
@@ -41,6 +46,9 @@ public class Cliente implements Observer, Iterable<Pedido>{
         //Faz o observer seja acionado assim q o pedido é feito.
         this.update(pedido, null);
         pedidos.add(pedido);
+        Notificacao notificacao = new Notificacao(EnviadorEmail.getInstancia(),"Pedido confirmado");
+        notificacao.notificar();
+        this.notificacoes.add(notificacao);
     }
 
     public void update(Observable pedido, Object arg1) {
