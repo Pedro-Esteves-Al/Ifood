@@ -58,5 +58,10 @@ class PedidoTest {
         assertEquals("pão queijo carne",pedido1.getConteudoPedido());
         assertEquals("Preparando", pedido1.verificaEstado().getEstado());
     }
+    @Test
+    void deveTestarPedidoIntegracao() {
+        PedidoAdapter pedidoAdapter = new PedidoAdapter("manjericao", "bife", "alface");
+        assertEquals("manjericao bife alface",pedidoAdapter.getConteudoPedido());
+    }
 
 }
