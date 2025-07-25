@@ -121,4 +121,18 @@ class ClienteTest {
         assertEquals("Avaliacao em análise", pedido.getAvaliacao().postarAvaliacao());
     }
 
+    @Test
+    void deveLancarExcecaoQuandoClienteTemPendencia() {
+        try {
+        Cliente cliente3 = new Cliente();
+        Financeiro.addClientePendente(cliente3);
+
+        cliente3.fazerPedido(pedido);
+        fail();
+
+        } catch (IllegalArgumentException e) {
+            assertEquals("Cliente possui pagamento pendente, não poderá fazer novos pedidos até completa-lo", e.getMessage());
+        }
+    }
+
 }

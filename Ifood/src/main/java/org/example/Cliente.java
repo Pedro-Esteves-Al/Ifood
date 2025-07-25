@@ -32,7 +32,11 @@ public class Cliente implements Observer, Iterable<Pedido>{
     }
 
     public void fazerPedido(Pedido pedido) {
-
+        if (ClienteFacade.verificarPendenciasPagamento(this)) {
+            throw new IllegalArgumentException(
+                "Cliente possui pagamento pendente, não poderá fazer novos pedidos até completa-lo"
+            );
+        }
         pedido.addObserver(this);
         //Faz o observer seja acionado assim q o pedido é feito.
         this.update(pedido, null);
