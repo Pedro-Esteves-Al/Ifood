@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Entregador implements Usuario{
+public class Entregador implements Usuario {
 
     private String nome;
     private List<Pedido> pedidos = new ArrayList<Pedido>();
