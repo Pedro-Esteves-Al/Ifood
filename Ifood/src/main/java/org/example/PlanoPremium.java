@@ -7,11 +7,11 @@ public class PlanoPremium extends PlanoDecorator {
 
     @Override
     public String getDescricao() {
-        return plano.getDescricao() + " + Suporte Premium, cashback e entrega grátis!";
+        return plano.getDescricao() + " + adicional Premium";
     }
 
     @Override
     public double getPreco() {
-        return plano.getPreco() + 3.50;
+        return plano.getPreco() + 10;
     }
 }

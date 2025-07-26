@@ -8,6 +8,6 @@ public class PlanoBase implements Plano {
 
     @Override
     public double getPreco() {
-        return 9.90;
+        return 10;
     }
 }
