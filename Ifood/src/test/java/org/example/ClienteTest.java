@@ -146,4 +146,20 @@ class ClienteTest {
         assertEquals("Cliente Marco fez um total de 1 pedido(s)",auditoria.getAuditoria());
     }
 
+    @Test
+    void nãoDevePermitirClienteDeslogadoFazerPedido() {
+        ClienteProxy clienteProxy = new ClienteProxy(cliente);
+        try {
+            clienteProxy.fazerPedido(pedido);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Cliente não está logado", e.getMessage());
+        }
+    }
+    @Test
+    void devePermitirClienteLogadoFazerPedido() {
+        cliente.setLogado(true);
+        ClienteProxy clienteProxy = new ClienteProxy(cliente);
+        clienteProxy.fazerPedido(new Pedido());
+        assertEquals("Pedido está Preparando", cliente.getEstadoPedido());
+    }
 }

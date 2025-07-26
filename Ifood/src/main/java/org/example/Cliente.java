@@ -10,6 +10,7 @@ public class Cliente implements Observer, Iterable<Pedido>, Usuario {
     private List<Tarefa> tarefas = new ArrayList<Tarefa>();
     private List<Pedido> pedidos = new ArrayList<Pedido>();
     private List<Notificacao> notificacoes = new ArrayList<Notificacao>();
+    private boolean isLogado;
 
     public String getNome() {
         return nome;
@@ -42,6 +43,14 @@ public class Cliente implements Observer, Iterable<Pedido>, Usuario {
 
     public List<Notificacao> getNotificacoes() {
         return notificacoes;
+    }
+
+    public boolean isLogado() {
+        return isLogado;
+    }
+
+    public void setLogado(boolean logado) {
+        isLogado = logado;
     }
 
     public void fazerPedido(Pedido pedido) {
